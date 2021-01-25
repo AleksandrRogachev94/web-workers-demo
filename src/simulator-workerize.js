@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import SimulateWorker from "workerize-loader!./util/simulate-clusters";
 
 const Simulator = () => {
   const [{ status, src }, setState] = useState({ status: "idle", src: null });
@@ -6,17 +8,10 @@ const Simulator = () => {
   const handleSimulate = () => {
     setState({ status: "pending", src: null });
 
-    const worker = new Worker("simulate-clusters.worker.js");
-    worker.postMessage(null);
-    worker.addEventListener(
-      "message",
-      function (e) {
-        const src = e.data;
-        setState({ status: "resolved", src });
-        worker.removeEventListener("simulate", this);
-      },
-      false
-    );
+    const worker = new SimulateWorker();
+    worker
+      .simulateClusters()
+      .then((src) => setState({ status: "resolved", src }));
   };
 
   return (

@@ -6,11 +6,8 @@ const Simulator = () => {
 
   const handleSimulate = () => {
     setState({ status: "pending", src: null });
-    new Promise((resolve) => resolve(simulateClusters())).then((src) =>
-      setState({ status: "resolved", src })
-    );
-    // const src = simulateClusters();
-    // setState({ status: "resolved", src });
+    const src = simulateClusters();
+    setState({ status: "resolved", src });
   };
 
   return (
