@@ -1,9 +1,9 @@
 import React from "react";
 
-// import Simulator from "./simulator";
-// import Simulator from "./simulator-with-worker";
-import Simulator from "./simulator-workerize";
 import Notes from "./notes";
+import Simulator from "./simulator";
+// import Simulator from "./simulator-with-worker";
+// import Simulator from "./simulator-workerize";
 import "./App.css";
 
 function App() {
